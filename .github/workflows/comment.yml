@@ -15,10 +15,22 @@ jobs:
           search_artifacts: true
           name: pull-request-number
           path: artifacts
-      - name: Add comment
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Set PR number
+        id: number
         run: |
-          number=$(< artifacts/number.txt)
-          gh issue comment "$number" --edit-last \
-            --body "Your deploy preview can be found at https://setcookie-staging-$number.fly.dev."
+          echo "number=$(< artifacts/number.txt)" >> $GITHUB_OUTPUT
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        id: find-comment
+        with:
+          issue-number: ${{ steps.number.outputs.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Your deploy preview
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ steps.number.outputs.number }}
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: >
+            Your deploy preview can be found at https://setcookie-staging-${{ steps.number.outputs.number }}.fly.dev.
