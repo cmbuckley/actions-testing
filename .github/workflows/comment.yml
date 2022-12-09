@@ -1,0 +1,13 @@
+name: Add Comment
+on:
+  workflow_dispatch:
+    inputs:
+      issue:
+        description: Issue number
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          gh issue comment "${{ github.event.inputs.issue }}" --edit-last \
+            --body "Your deploy preview can be found at https://setcookie-staging-${{ github.event.inputs.issue }}.fly.dev."
