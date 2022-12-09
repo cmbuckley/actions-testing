@@ -7,6 +7,7 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Download artifact
         uses: dawidd6/action-download-artifact@v2
         with:
@@ -18,5 +19,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh issue comment $(< artifacts/number.txt) --edit-last \
-            --body "Your deploy preview can be found at https://setcookie-staging-${{ github.event.inputs.issue }}.fly.dev."
+          number=$(< artifacts/number.txt)
+          gh issue comment "$number" --edit-last \
+            --body "Your deploy preview can be found at https://setcookie-staging-$number.fly.dev."
