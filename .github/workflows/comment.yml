@@ -8,6 +8,9 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - name: Add comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
           gh issue comment "${{ github.event.inputs.issue }}" --edit-last \
             --body "Your deploy preview can be found at https://setcookie-staging-${{ github.event.inputs.issue }}.fly.dev."

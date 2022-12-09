@@ -8,5 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Trigger comment workflow
-        run: |
-          gh workflow run comment.yml
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run comment.yml
