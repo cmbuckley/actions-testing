@@ -12,6 +12,7 @@ jobs:
         with:
           workflow: pr.yml
           search_artifacts: true
+          name: pull-request-number
           path: artifacts
       - name: Add comment
         env:
