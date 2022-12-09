@@ -10,7 +10,7 @@ jobs:
       - name: Download artifact
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: comment.yml
+          workflow: pr.yml
           search_artifacts: true
           path: artifacts
       - name: Add comment
