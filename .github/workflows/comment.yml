@@ -1,16 +1,21 @@
 name: Add Comment
 on:
-  workflow_dispatch:
-    inputs:
-      issue:
-        description: Issue number
+  workflow_run:
+    workflows: PR Open
+    types: completed
 jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: comment.yml
+          search_artifacts: true
+          path: artifacts
       - name: Add comment
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh issue comment "${{ github.event.inputs.issue }}" --edit-last \
+          gh issue comment $(< artifacts/number.txt) --edit-last \
             --body "Your deploy preview can be found at https://setcookie-staging-${{ github.event.inputs.issue }}.fly.dev."
