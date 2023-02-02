@@ -4,4 +4,4 @@ jobs:
   push:
     runs-on: ubuntu-latest
     steps:
-      - run: systemd-resolve cmbuckley.co.uk
+      - run: resolvectl cmbuckley.co.uk
