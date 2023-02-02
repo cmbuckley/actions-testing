@@ -1,0 +1,7 @@
+name: Push
+on: push
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - run: dig cmbuckley.co.uk
