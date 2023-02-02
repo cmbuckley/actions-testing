@@ -4,4 +4,4 @@ jobs:
   push:
     runs-on: ubuntu-latest
     steps:
-      - run: dig cmbuckley.co.uk
+      - run: cat /etc/systemd/resolved.conf
