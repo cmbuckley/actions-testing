@@ -4,4 +4,6 @@ jobs:
   push:
     runs-on: ubuntu-latest
     steps:
-      - run: cat /etc/systemd/resolved.conf
+      - run: |
+          systemd-analyze cat-config systemd/resolved.conf
+          ls /etc/systemd/network/*.network | while read f; do echo $f; cat $f; done
