@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Test
         id: test
-				run: echo "wat=${{ matrix.thing }}" >> $GITHUB_OUTPUT
+        run: echo "wat=${{ matrix.thing }}" >> $GITHUB_OUTPUT
 
       - uses: cloudposse/github-action-matrix-outputs-write@0.3.0
         id: out
@@ -30,5 +30,5 @@ jobs:
         with:
           matrix-step-name: build
 
-    	- name: Output
-				run: echo "${{ steps.read.outputs.result }}"
+      - name: Output
+        run: echo "${{ steps.read.outputs.result }}"
