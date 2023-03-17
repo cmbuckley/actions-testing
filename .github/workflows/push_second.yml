@@ -1,0 +1,22 @@
+name: Push 2
+
+on: push
+
+jobs:
+  other-flow:
+    uses: ./.github/workflows/push.yml
+    secrets: inherit
+  combined:
+    runs-on: ubuntu-latest
+    needs: [other-flow]
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: test-${{ github.sha }}
+
+      - name: Do stuff
+        run: cat test.txt
