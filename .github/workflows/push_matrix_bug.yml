@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-				run: echo test
+        run: echo test
   two:
     runs-on: ubuntu-latest
     strategy:
@@ -13,4 +13,4 @@ jobs:
         broken:
     steps:
       - name: Output
-				run: echo ${{ matrix.broken }}
+        run: echo ${{ matrix.broken }}
