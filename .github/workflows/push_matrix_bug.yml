@@ -1,10 +1,13 @@
-name: Status Check Matrix Bug
+name: Push
 on: push
-
 jobs:
-    name: Broken Matrix Job
+  one:
     runs-on: ubuntu-latest
-    needs: determine-modules
+    steps:
+      - name: Test
+				run: echo test
+  two:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         broken:
