@@ -1,0 +1,14 @@
+name: Status Check Matrix Bug
+on: push
+
+jobs:
+  matrix-bug:
+    name: Broken Matrix Job
+    runs-on: ubuntu-latest
+    needs: determine-modules
+    strategy:
+      matrix:
+        broken:
+    steps:
+      - name: Output
+				run: echo ${{ matrix.broken }}
