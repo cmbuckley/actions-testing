@@ -7,10 +7,11 @@ jobs:
       - name: Test
         run: echo test
   two:
+    needs: one
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        broken:
+        broken: ${{ needs.one.outputs.missing }}
     steps:
       - name: Output
         run: echo ${{ matrix.broken }}
