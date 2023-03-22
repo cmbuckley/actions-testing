@@ -9,6 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - name: Test
+        run: echo ${{ github.event_name == 'push'
+          && 'woo'
+          || github.event_name }}
+
       - name: Create file
         run: echo ${{ github.run_id }} > test.txt
 
