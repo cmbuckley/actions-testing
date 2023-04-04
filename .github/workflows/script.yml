@@ -1,0 +1,12 @@
+name: Healthcheck
+on: push
+jobs:
+  script:
+    name: Script
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run script
+        uses: actions/github-script@v6
+        with:
+          script: require('../scripts/test')(core);
