@@ -9,4 +9,4 @@ jobs:
       - name: Run script
         uses: actions/github-script@v6
         with:
-          script: require('../scripts/test')(core);
+          script: require('scripts/test')(core);
