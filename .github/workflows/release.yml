@@ -1,12 +1,15 @@
 name: Keep the versions up-to-date
 
+permissions:
+  contents: write
+  
 on:
   release:
     types: [published, edited]
 
 jobs:
   actions-tagger:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: Actions-R-Us/actions-tagger@latest
         with:
