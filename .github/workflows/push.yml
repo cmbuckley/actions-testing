@@ -4,4 +4,4 @@ jobs:
   push:
     runs-on: ubuntu-latest
     steps:
-      - run: resolvectl status
+      - run: env
