@@ -4,13 +4,20 @@ on:
     branches: main
 jobs:
   job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo job1
+    steps:
+      - run: echo job1
     steps:
       - run: echo job1
   job2:
+    runs-on: ubuntu-latest
     if: ${{ false }}
     steps:
       - run: echo job2
   job3:
+    runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }}
     needs: job2
     steps:
