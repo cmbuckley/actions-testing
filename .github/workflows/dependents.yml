@@ -1,0 +1,10 @@
+name: Dependent jobs
+on:
+  pull_request:
+    branches: main
+jobs:
+  job1:
+		if: ${{ false }}
+  job2:
+    if: ${{ github.event_name == 'push' }}
+    needs: job1
