@@ -4,11 +4,14 @@ on:
     branches: main
 jobs:
   job1:
-    if: ${{ false }}
     steps:
       - run: echo job1
   job2:
-    if: ${{ github.event_name == 'push' }}
-    needs: job1
+    if: ${{ false }}
     steps:
       - run: echo job2
+  job3:
+    if: ${{ github.event_name == 'push' }}
+    needs: job2
+    steps:
+      - run: echo job3
