@@ -14,7 +14,7 @@ jobs:
       - run: echo job2
   job3:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ always() && github.event_name == 'push' }}
     needs: job2
     steps:
       - run: echo job3
