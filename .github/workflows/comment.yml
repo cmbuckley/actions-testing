@@ -3,7 +3,6 @@ on:
   workflow_run:
     workflows:
       - PR Open
-      - Push
     types: completed
 jobs:
   comment:
