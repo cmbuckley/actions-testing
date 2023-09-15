@@ -9,3 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo '${{ toJSON(github) }}'
+      - run: >
+          number=$(curl -s ${{ github.event.workflow_run.jobs_url |
+            jq -r '.jobs[0].steps[] | select(.name | contains("number.txt")) | .name' |
+            cut -f 3 -d ' ')
+          echo "PR: #$number"
