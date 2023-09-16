@@ -4,4 +4,5 @@ jobs:
   push:
     runs-on: ubuntu-latest
     steps:
-      - run: true
+      - run: |
+          echo Testing >> $GITHUB_STEP_SUMMARY
