@@ -5,4 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo Testing >> $GITHUB_STEP_SUMMARY
+          curl -X GET "https://httpbin.org/headers" -H "accept: application/json"
