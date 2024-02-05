@@ -5,4 +5,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          curl -X GET "https://httpbin.org/headers" -H "accept: application/json"
+          export KV_NAMESPACE_ID=$(curl -X GET "https://httpbin.org/headers" -H "accept: application/json")
+          echo "KV: [$KV_NAMESPACE_ID]"
