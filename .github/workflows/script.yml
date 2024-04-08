@@ -14,4 +14,4 @@ jobs:
       - name: Output steps
         run: |
           echo '${{ github.job }}'
-          echo '${{ jobs[github.job].name }}'
+          echo '${{ toJSON(job) }}'
