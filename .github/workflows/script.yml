@@ -16,5 +16,5 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           echo '${{ github.job }}'
-          echo ${{ github.workflow_sha }}
+          echo ${{ github.workflow }}
           gh workflow view ${{ github.workflow }} -r ${{ github.ref}} -y | yq eval .jobs.${{ github.job }}.name -
