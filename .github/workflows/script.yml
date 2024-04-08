@@ -12,4 +12,6 @@ jobs:
         with:
           script: require('.github/scripts/test')(core);
       - name: Output steps
-        run: echo '${{ toJSON(steps.runscript) }}'
+        run: |
+          echo '${{ github.job }}'
+          echo '${{ jobs[github.job].name }}'
