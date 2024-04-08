@@ -14,4 +14,5 @@ jobs:
       - name: Output steps
         run: |
           echo '${{ github.job }}'
-          echo '${{ toJSON(job) }}'
+          echo ${{ github.workflow_sha }}
+          gh workflow view ${{ github.workflow }} -r ${{ github.ref}} -y | yq eval .jobs.${{ github.job }}.name -
