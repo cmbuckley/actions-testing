@@ -12,6 +12,8 @@ jobs:
         with:
           script: require('.github/scripts/test')(core);
       - name: Output steps
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           echo '${{ github.job }}'
           echo ${{ github.workflow_sha }}
