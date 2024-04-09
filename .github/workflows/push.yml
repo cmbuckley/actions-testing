@@ -17,7 +17,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh run view ${{ github.run_id }} --json jobs --jq '
+          gh -R ${{ github.repository }} run view ${{ github.run_id }} --json jobs --jq '
             .jobs[] | select(.name == "Run Tests")
             | (.url + (.steps[] | select(.name == "Run Test Script")
               | "?check_suite_focus#step:\(.number):1"))'
