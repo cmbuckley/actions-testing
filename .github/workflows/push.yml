@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get URL
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh run view ${{ github.run_id }} --json jobs --jq '
             .jobs[] | select(.name == "Run Tests")
