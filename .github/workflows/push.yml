@@ -6,3 +6,8 @@ jobs:
     steps:
       - run: |
           pwd
+  run_tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps: 
+      - run: echo ${{ github.job }}
