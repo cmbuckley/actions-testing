@@ -13,6 +13,8 @@ jobs:
       - name: Run Test Script
         run: true
 
+      - run: sleep 30s
+
       - name: Get URL
         env:
           GH_TOKEN: ${{ github.token }}
