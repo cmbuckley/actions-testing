@@ -9,5 +9,10 @@ jobs:
   run_tests:
     name: Run Tests
     runs-on: ubuntu-latest
-    steps: 
-      - run: echo ${{ github.job }}
+    steps:
+      - name: Get URL
+        run: |
+          gh run view ${{ github.run_id }} --json jobs --jq '
+            .jobs[] | select(.name == "Run Tests")
+            | (.url + (.steps[] | select(.name == "Get URL")
+              | "?check_suite_focus#step:\(.number):1"))'
