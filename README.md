@@ -1,3 +1,3 @@
 # actions-testing
 
-Testy testy test.
+Testy test.
