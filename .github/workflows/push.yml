@@ -5,21 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          pwd
-  run_tests:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Test Script
-        run: true
-
-      - run: sleep 30s
-
-      - name: Get URL
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh -R ${{ github.repository }} run view ${{ github.run_id }} --json jobs --jq '
-            .jobs[] | select(.name == "Run Tests")
-            | (.url + (.steps[] | select(.name == "Run Test Script")
-              | "?check_suite_focus#step:\(.number):1"))'
+          echo "::warning::There is an issue!"
