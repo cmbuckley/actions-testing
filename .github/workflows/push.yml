@@ -13,4 +13,4 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     steps:
       - run: |
-          gh run view ${{ github.run_id }}
+          gh -R ${{ github.repository }} run view ${{ github.run_id }}
