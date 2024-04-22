@@ -13,4 +13,8 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     steps:
       - run: |
-          gh -R ${{ github.repository }} run view ${{ github.run_id }}
+          JOB_ID=$(gh -R ${{ github.repository }} run view ${{ github.run_id }} --json jobs -q '.jobs[0].databaseId')
+          ISSUES="$(gh api repos/${{ github.repository }}/check-runs/$JOB_ID/annotations -q '.[] | select(.annotation_level=="warning") | .message')"
+          if [ -n "$ISSUES" ]; then
+            echo "$ISSUES"
+          fi
