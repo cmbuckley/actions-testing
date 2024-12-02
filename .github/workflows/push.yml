@@ -1,21 +1,14 @@
 name: Push
 on: push
 jobs:
-  issue:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo "::warning::There is an issue!"
   check:
     runs-on: ubuntu-latest
-    needs: issue
-    env:
-      GH_TOKEN: ${{ github.token }}
     steps:
-      - run: gh api user
       - run: |
-          JOB_ID=$(gh -R ${{ github.repository }} run view ${{ github.run_id }} --json jobs -q '.jobs[0].databaseId')
-          ISSUES="$(gh api repos/${{ github.repository }}/check-runs/$JOB_ID/annotations -q '.[] | select(.annotation_level=="warning") | .message')"
-          if [ -n "$ISSUES" ]; then
-            echo "$ISSUES"
-          fi
+          echo $USER
+          id -gn
+          touch foo
+          sudo chown root:root foo
+          ls -l foo
+          sudo chown $USER: foo
+          ls -l foo
