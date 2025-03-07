@@ -5,10 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo $USER
-          id -gn
-          touch foo
-          sudo chown root:root foo
-          ls -l foo
-          sudo chown $USER: foo
-          ls -l foo
+          echo ${{ github.workflow }}
