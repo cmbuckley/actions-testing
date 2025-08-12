@@ -3,6 +3,9 @@ on: push
 jobs:
   check:
     runs-on: ubuntu-latest
+    environment:
+      name: testytest
     steps:
+      - run: echo '${{ toJSON(github) }}'
       - run: |
           echo ${{ github.workflow }}
