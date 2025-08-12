@@ -1,12 +1,10 @@
 name: Push
 on: push
-env:
-  ENV_NAME: testytest
 jobs:
   check:
     runs-on: ubuntu-latest
     environment:
-      name: ${{ env.ENV_NAME }}
+      name: testytest
     steps:
       - run: |
-          echo ${{ env.ENV_NAME }}
+          echo '${{ toJSON(github) }}'
