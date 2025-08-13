@@ -16,6 +16,5 @@ jobs:
       - name: Delete environment
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
-          ENVIRONMENT: testytest
         run: |
-          gh api -X DELETE repos/${{ github.repository }}/environments/$ENVIRONMENT
+          gh api repos/${{ github.repository }}/environments
