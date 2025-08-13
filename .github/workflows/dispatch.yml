@@ -6,15 +6,8 @@ jobs:
     name: Delete Environment
     runs-on: ubuntu-latest
     steps:
-      - name: Generate JWT
-        id: generate-token
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ vars.GH_APP_ID }}
-          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
-
       - name: Delete environment
         env:
-          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          gh api repos/${{ github.repository }}/environments
+          gh api -X DELETE repos/${{ github.repository }}/environments/testytest
