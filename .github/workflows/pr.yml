@@ -7,6 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: |
+          echo ${{ github.sha }}
+          echo $GITHUB_SHA
+          echo ${{ toJSON(github.event.pull_request) }}
       - run: echo ${{ github.event.pull_request.number }} > number.txt
       - uses: actions/upload-artifact@v3
         with:
