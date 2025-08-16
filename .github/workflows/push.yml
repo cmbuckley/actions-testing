@@ -7,4 +7,5 @@ jobs:
       name: testytest
     steps:
       - run: |
+          echo false
           echo '${{ toJSON(github) }}'
