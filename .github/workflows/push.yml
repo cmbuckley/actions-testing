@@ -8,5 +8,8 @@ jobs:
     steps:
       - run: |
           echo '${{ toJSON(github) }}'
-      - run: |
+      - name: Delete env
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
           gh api -X DELETE repos/${{ github.repository }}/environments/testytest
