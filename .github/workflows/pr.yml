@@ -2,13 +2,16 @@ name: PR Open
 on:
   pull_request:
     branches: main
+permissions:
+  actions: write
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - run: |
-          echo ${{ github.sha }}
-          echo $GITHUB_SHA
-          echo ${{ toJSON(github.event.pull_request) }}
-      - run: echo ${{ github.event.pull_request.number }} > number.txt
+      - name: Dispatch
+        env: 
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/{owner}/{repo}/actions/workflows/dispatched.yml/dispatches \
+            -f ref=${{ github.ref }} -f 'inputs[issue]=${{ github.event.number }}'
