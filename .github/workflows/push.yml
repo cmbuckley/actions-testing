@@ -7,5 +7,6 @@ jobs:
       name: testytest
     steps:
       - run: |
-          false
           echo '${{ toJSON(github) }}'
+      - run: |
+          gh api -X DELETE repos/${{ github.repository }}/environments/testytest
