@@ -2,12 +2,12 @@ name: Manual Dispatch
 on: workflow_dispatch
 
 jobs:
-  delete-env:
-    name: Delete Environment
+  dispatch:
+    name: Do Dispatchy Things
     runs-on: ubuntu-latest
     steps:
-      - name: Delete environment
+      - name: Prove secrets access
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NOT_SO_SECRET: ${{ secrets.NOT_SO_SECRET }}
         run: |
-          gh api -X DELETE repos/${{ github.repository }}/environments/testytest
+          sed 's/./& /g' <<< "$NOT_SO_SECRET"
