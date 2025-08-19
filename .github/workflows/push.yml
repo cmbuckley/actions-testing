@@ -15,6 +15,8 @@ jobs:
       matrix:
         status: [in_progress, failure, success]
     steps:
+      - uses: actions/checkout@v5
+      
       - id: call
         uses: ./.github/workflows/call.yml
         with:
