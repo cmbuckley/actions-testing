@@ -9,18 +9,17 @@ jobs:
       - run: |
           echo '${{ toJSON(github) }}'
   
-  outputs:
-    runs-on: ubuntu-latest
+  call:
+    uses: ./.github/workflows/call.yml
     strategy:
       matrix:
         status: [in_progress, failure, success]
+    with:
+      status: ${{ matrix.status }}
+
+  outputs:
+    runs-on: ubuntu-latest
+    needs: call
     steps:
-      - uses: actions/checkout@v5
-      
-      - id: call
-        uses: ./.github/workflows/call.yml
-        with:
-          status: ${{ matrix.status }}
-          
       - run: |
-          echo '${{ toJSON(steps.call.outputs) }}'
+          echo '${{ toJSON(needs.call.outputs) }}'    
