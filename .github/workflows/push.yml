@@ -8,3 +8,17 @@ jobs:
     steps:
       - run: |
           echo '${{ toJSON(github) }}'
+  
+  outputs:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        status: [in_progress, failure, success]
+    steps:
+      - id: call
+        uses: ./.github/workflows/call.yml
+        with:
+          status: ${{ matrix.status }}
+          
+      - run: |
+          echo '${{ toJSON(steps.call.outputs) }}'
