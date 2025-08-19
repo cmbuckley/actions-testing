@@ -7,9 +7,12 @@ on:
         required: true
         type: string
     outputs:
-      emoji: ${{ jobs.call.outputs.emoji }}
-      title: ${{ jobs.call.outputs.title }}
-      preview: ${{ jobs.call.outputs.preview }}
+      emoji:
+        value: ${{ jobs.call.outputs.emoji }}
+      title:
+        value: ${{ jobs.call.outputs.title }}
+      preview:
+        value: ${{ jobs.call.outputs.preview }}
 jobs:
   call:
     name: Do Cally Things
