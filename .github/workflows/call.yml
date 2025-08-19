@@ -1,0 +1,28 @@
+name: Workflow Call 
+on:
+  workflow_call:
+    inputs:
+      status:
+        description: Deployment status
+        required: true
+        type: string
+jobs:
+  call:
+    name: Do Cally Things
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get comment text
+        id: get-text
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = github.events.inputs.status,
+              data = {
+                in_progress: ['👷', 'in progress', false],
+                failure:     ['❌', 'failed', false],
+                success:     ['✅', 'ready', true],
+              };
+
+            core.setOutput('emoji', data[status][0]);
+            core.setOutput('title', data[status][1]);
+            core.setOutput('preview', data[status][2]);
