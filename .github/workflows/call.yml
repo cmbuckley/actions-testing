@@ -7,13 +7,17 @@ on:
         required: true
         type: string
     outputs:
-      emoji: ${{ steps.get-text.outputs.emoji }}
-      title: ${{ steps.get-text.outputs.title }}
-      preview: ${{ steps.get-text.outputs.preview }}
+      emoji: ${{ jobs.call.outputs.emoji }}
+      title: ${{ jobs.call.outputs.title }}
+      preview: ${{ jobs.call.outputs.preview }}
 jobs:
   call:
     name: Do Cally Things
     runs-on: ubuntu-latest
+    outputs:
+      emoji: ${{ steps.get-text.outputs.emoji }}
+      title: ${{ steps.get-text.outputs.title }}
+      preview: ${{ steps.get-text.outputs.preview }}
     steps:
       - name: Get comment text
         id: get-text
