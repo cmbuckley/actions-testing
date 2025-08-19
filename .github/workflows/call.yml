@@ -6,6 +6,10 @@ on:
         description: Deployment status
         required: true
         type: string
+    outputs:
+      emoji: ${{ steps.get-text.outputs.emoji }}
+      title: ${{ steps.get-text.outputs.title }}
+      preview: ${{ steps.get-text.outputs.preview }}
 jobs:
   call:
     name: Do Cally Things
