@@ -13,4 +13,4 @@ jobs:
     steps:
       - uses: actions/github-script@v7
         with:
-          script: console.log(github);
+          script: console.log(context.payload.inputs);
