@@ -6,8 +6,6 @@ jobs:
     name: Do Dispatchy Things
     runs-on: ubuntu-latest
     steps:
-      - name: Prove secrets access
-        env:
-          NOT_SO_SECRET: ${{ secrets.NOT_SO_SECRET }}
-        run: |
-          sed 's/./& /g' <<< "$NOT_SO_SECRET"
+      - uses: actions/github-script@v7
+        with:
+          script: console.log(github);
