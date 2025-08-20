@@ -1,5 +1,10 @@
 name: Manual Dispatch
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      foo:
+        description: Foo
+        type: number
 
 jobs:
   dispatch:
