@@ -19,8 +19,6 @@ module.exports = async (core) => {
         return new Promise(resolve => {
             https.get({
                 hostname: options.hostname,
-                port: 444,
-                timeout: options.timeout,
                 headers: {
                     host: options.domain,
                 },
