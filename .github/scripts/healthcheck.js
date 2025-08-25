@@ -14,6 +14,8 @@ module.exports = async (core) => {
         warnings = [];
 
     async function check(options) {
+        const connectTimer;
+
         return new Promise(resolve => {
             https.get({
                 hostname: options.hostname,
@@ -23,8 +25,9 @@ module.exports = async (core) => {
                     host: options.domain,
                 },
             }, function (response) {
+                clearTimeout(connectTimer);
                 const cert = response.socket.getPeerCertificate();
-                this.abort(); // cancel the connection
+                this.destroy(); // cancel the connection
 
                 if (cert === null || !Object.keys(cert).length) {
                     core.error(`No certificate found for ${options.domain}.`);
@@ -51,7 +54,14 @@ module.exports = async (core) => {
                 }
 
                 resolve();
+            }).on('socket', function (socket) {
+                if (socket.connecting) {
+                    connectTimer = setTimeout(() => {
+                        this.destroy(new Error(`Connect timeout after ${options.timeout}ms`));
+                    }, options.timeout);
+                }
             }).on('error', function (e) {
+                clearTimeout(connectTimer);
                 if (!options.attempts) options.attempts = 1;
                 core.info(`Error connecting to ${options.domain} (attempt ${options.attempts}): ${e.message}`);
 
@@ -66,7 +76,7 @@ module.exports = async (core) => {
                     core.setFailed();
                     resolve();
                 }
-            });
+            })
         });
     }
 
