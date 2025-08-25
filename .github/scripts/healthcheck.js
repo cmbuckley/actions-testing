@@ -14,7 +14,7 @@ module.exports = async (core) => {
         warnings = [];
 
     async function check(options) {
-        const connectTimer;
+        let connectTimer;
 
         return new Promise(resolve => {
             https.get({
