@@ -1,0 +1,25 @@
+name: Healthcheck
+on: workflow_dispatch
+
+jobs:
+  tls-healthcheck:
+    name: TLS Healthcheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up git repo
+        uses: actions/checkout@v5
+
+      - name: Set up WARP
+        uses: fscarmen/warp-on-actions@v1.3
+        with:
+          mode: client
+          
+      - name: Check domains and certificate validity
+        uses: actions/github-script@v7
+        env:
+          HOST: vps.cmbuckley.co.uk
+          MONITOR_DOMAINS: test.cmbuckley.co.uk
+          ERROR_THRESHOLD: 7
+          WARN_THRESHOLD: 28
+        with:
+          script: require('.github/scripts/healthcheck')(core);
