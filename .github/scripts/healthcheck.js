@@ -19,7 +19,7 @@ module.exports = async (core) => {
                 this.abort(); // cancel the connection
 
                 if (cert === null || !Object.keys(cert).length) {
-                    core.error(`No certificate found for ${domain}.`);
+                    core.error(`No certificate found for ${options.domain}.`);
                     core.setFailed();
                 } else {
                     const daysLeft = parseInt((Date.parse(cert.valid_to) - new Date().getTime()) / (1000 * 60 * 60 * 24), 10),
@@ -27,10 +27,10 @@ module.exports = async (core) => {
                         colour = '\u001b[' + (daysLeft < ERROR_THRESHOLD ? 31 : (daysLeft < WARN_THRESHOLD ? 33 : 32)) + 'm',
                         reset = '\u001b[0m';
 
-                    core[level](`Certificate for ${domain} expires in ${colour}${daysLeft}${reset} days (${cert.valid_to})`);
+                    core[level](`Certificate for ${options.domain} expires in ${colour}${daysLeft}${reset} days (${cert.valid_to})`);
 
                     if (level == 'warning') {
-                        warnings.push({domain, daysLeft, date: cert.valid_to});
+                        warnings.push({domain: options.domain, daysLeft, date: cert.valid_to});
                     }
 
                     if (daysLeft < ERROR_THRESHOLD) {
@@ -47,7 +47,7 @@ module.exports = async (core) => {
                         })).then(resolve);
                     }, options.retryDelay);
                 } else {
-                    core.error(`Error connecting to ${domain} after ${options.attempts} attempts: ${e.message}`);
+                    core.error(`Error connecting to ${options.domain} after ${options.attempts} attempts: ${e.message}`);
                     core.setFailed();
                     resolve();
                 }
