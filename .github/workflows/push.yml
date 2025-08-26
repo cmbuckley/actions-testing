@@ -3,7 +3,7 @@ on: push
 
 defaults:
   run:
-    shell: bash -e ${{ runner.debug && '-x' || '' }} {0}
+    shell: bash -e ${{ env.RUNNER_DEBUG && '-x' || '' }} {0}
 
 jobs:
   check:
