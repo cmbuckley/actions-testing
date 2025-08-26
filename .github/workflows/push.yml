@@ -4,13 +4,11 @@ on: push
 jobs:
   check:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash -e ${{ env.RUNNER_DEBUG && '-x' || '' }} {0}
     environment:
       name: testytest
     steps:
       - run: |
+          [ "$RUNNER_DEBUG" == '1' ] && set -x 
           curl https://bux.re
   
   call:
