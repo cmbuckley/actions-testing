@@ -1,5 +1,10 @@
 name: Push
 on: push
+
+defaults:
+  run:
+    shell: bash -e ${{ runner.debug && '-x' || '' }} {0}
+
 jobs:
   check:
     runs-on: ubuntu-latest
