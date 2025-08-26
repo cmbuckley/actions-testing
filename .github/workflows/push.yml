@@ -1,13 +1,12 @@
 name: Push
 on: push
 
-defaults:
-  run:
-    shell: bash -e ${{ env.RUNNER_DEBUG && '-x' || '' }} {0}
-
 jobs:
   check:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -e ${{ env.RUNNER_DEBUG && '-x' || '' }} {0}
     environment:
       name: testytest
     steps:
