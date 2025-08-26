@@ -8,7 +8,7 @@ jobs:
       name: testytest
     steps:
       - run: |
-          [ "$RUNNER_DEBUG" == '1' ] && set -x 
+          set -e ${RUNNER_DEBUG:+-x}
           curl https://bux.re
   
   call:
