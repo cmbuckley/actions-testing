@@ -12,8 +12,7 @@ jobs:
       name: testytest
     steps:
       - run: |
-          env
-          echo '${{ toJSON(github) }}'
+          curl https://bux.re
   
   call:
     uses: ./.github/workflows/call.yml
