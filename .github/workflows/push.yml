@@ -23,7 +23,7 @@ jobs:
               DEF
     steps:
       - run: |
-          jq . <<< '${{ toJSON(matrix) }}'
+          echo '${{ matrix.secrets }}'
 
   outputs:
     runs-on: ubuntu-latest
