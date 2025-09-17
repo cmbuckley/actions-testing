@@ -12,12 +12,18 @@ jobs:
           curl https://bux.re
   
   call:
-    uses: ./.github/workflows/call.yml
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         status: [in_progress, failure, success]
-    with:
-      status: ${{ matrix.status }}
+        include:
+          - status: failure
+            secrets: |
+              ABC
+              DEF
+    steps:
+      - run: |
+          jq . <<< "${{ toJSON(matrix) }}"
 
   outputs:
     runs-on: ubuntu-latest
