@@ -10,24 +10,9 @@ jobs:
       - run: |
           set -e ${RUNNER_DEBUG:+-x}
           curl https://bux.re
-  
-  call:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        status: [in_progress, failure, success]
-        include:
-          - status: failure
-            secrets: |
-              ABC
-              DEF
-    steps:
-      - run: |
-          echo '${{ matrix.secrets }}'
 
-  outputs:
+  events:
     runs-on: ubuntu-latest
-    needs: call
     steps:
       - run: |
-          echo '${{ toJSON(needs.call.outputs) }}'    
+          gh api users/${{ github.repository_owner }}/events/public
