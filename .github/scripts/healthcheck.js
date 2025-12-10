@@ -1,6 +1,7 @@
 const https = require('https');
 
 module.exports = async (core) => {
+    console.log(process.env);
     const {
             HOST,
             SLACK_WEBHOOK,
