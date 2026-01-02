@@ -1,4 +1,4 @@
-name: Rebuild (New Year)
+name: Cron
 on:
   workflow_dispatch:
   schedule:
