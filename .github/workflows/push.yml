@@ -19,3 +19,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh api users/${{ github.repository_owner }}/events/public -q length
+
+  toml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up git repo
+        uses: actions/checkout@v5
+
+      - name: Parse toml
+        run: |
+          yq .route test.toml
