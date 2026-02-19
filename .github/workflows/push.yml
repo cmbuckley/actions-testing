@@ -31,7 +31,7 @@ jobs:
         uses: sebrollen/toml-action@v1.2.0
         with:
           file: test.toml
-          field: env.production.route
+          field: ${{ true && 'route' || 'env.test.route' }}
 
       - name: Output value
         run: echo ${{ steps.toml.outputs.value }}
