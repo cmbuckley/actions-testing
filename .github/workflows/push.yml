@@ -1,6 +1,9 @@
 name: Push
 on: push
 
+env:
+  PAGE_URL: http://example.com/foo/
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -13,12 +16,15 @@ jobs:
 
   events:
     runs-on: ubuntu-latest
+    environment:
+      name: Test
+      url: ${{ steps.get_url.outputs.url }}
     steps:
-      - name: Events
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api users/${{ github.repository_owner }}/events/public -q length
+      - id: get_url
+        name: Get page URL
+        run:
+          url=$(sed 's/^http:/https:/' <<< "${{ env.environment_url || env.page_url }}")
+          echo "url=$url" >> $GITHUB_OUTPUT
 
   toml:
     runs-on: ubuntu-latest
