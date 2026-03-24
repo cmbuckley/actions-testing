@@ -16,15 +16,13 @@ jobs:
 
   events:
     runs-on: ubuntu-latest
-    environment:
-      name: Test
-      url: ${{ steps.get_url.outputs.url }}
     steps:
       - id: get_url
         name: Get page URL
         run:
           url=$(sed 's/^http:/https:/' <<< "${{ env.environment_url || env.page_url }}")
           echo "url=$url" >> $GITHUB_OUTPUT
+          echo $url
 
   toml:
     runs-on: ubuntu-latest
