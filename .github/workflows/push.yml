@@ -20,7 +20,7 @@ jobs:
       - id: get_url
         name: Get page URL
         run: |
-          url=$(sed 's/^http:/https:/' <<< "${{ env.environment_url || env.page_url }}")
+          url=$(sed 's/^http:/https:/' <<< "${{ env.environment_url || env.PAGE_URL }}")
           echo "url=$url" >> $GITHUB_OUTPUT
           echo $url
 
