@@ -13,6 +13,8 @@ jobs:
       - run: |
           set -e ${RUNNER_DEBUG:+-x}
           curl https://bux.re
+          echo "::notice title=Testing testing::Missing semicolon"
+          echo "::notice::Other notice"
 
   events:
     runs-on: ubuntu-latest
