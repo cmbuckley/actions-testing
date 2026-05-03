@@ -5,12 +5,19 @@ on:
       foo:
         description: Foo
         type: number
+      bar:
+        description: Bar
+        type: boolean
+        default: true
 
 jobs:
   dispatch:
     name: Do Dispatchy Things
     runs-on: ubuntu-latest
     steps:
+      - run: echo $BAR
+        env:
+          BAR: ${{ inputs.bar }}
       - uses: actions/github-script@v7
         with:
           script: console.log(context.payload.inputs);
