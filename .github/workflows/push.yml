@@ -19,7 +19,9 @@ jobs:
   events:
     runs-on: ubuntu-latest
     steps:
-      - run: cspell .
+      - run: |
+        npm install -g cspell
+        cspell .
       - id: get_url
         name: Get page URL
         run: |
