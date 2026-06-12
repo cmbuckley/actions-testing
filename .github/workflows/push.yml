@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-        npm install -g cspell
-        cspell .
+          npm install -g cspell
+          cspell .
       - id: get_url
         name: Get page URL
         run: |
