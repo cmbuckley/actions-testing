@@ -19,6 +19,7 @@ jobs:
   events:
     runs-on: ubuntu-latest
     steps:
+      - run: cspell .
       - id: get_url
         name: Get page URL
         run: |
