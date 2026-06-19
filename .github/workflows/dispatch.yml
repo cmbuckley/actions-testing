@@ -25,4 +25,6 @@ jobs:
           BUILD_HOME: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.home || 'true' }}
           BUILD_SHOWCASE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.showcase || 'true'}}
           BUILD_PORTFOLIO: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.portfolio || 'true' }}
-        run: env
+        run: |
+          echo '${{ toJSON(github.event.inputs) }}'
+          echo '${{ toJSON(inputs) }}'
