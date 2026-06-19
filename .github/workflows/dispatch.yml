@@ -2,22 +2,27 @@ name: Manual Dispatch
 on:
   workflow_dispatch:
     inputs:
-      foo:
-        description: Foo
-        type: number
-      bar:
-        description: Bar
+      home:
+        description: Home page
+        type: boolean
+        default: true
+      showcase:
+        description: Showcase pages
+        type: boolean
+        default: true
+      portfolio:
+        description: Portfolio pages
         type: boolean
         default: true
 
 jobs:
-  dispatch:
-    name: Do Dispatchy Things
+  test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
-      - run: echo $BAR
+      - name: Testy test
         env:
-          BAR: ${{ inputs.bar }}
-      - uses: actions/github-script@v7
-        with:
-          script: console.log(context.payload.inputs);
+          BUILD_HOME: ${{ github.event_name == 'workflow_dispatch' && inputs.home || 'true' }}
+          BUILD_SHOWCASE: ${{ github.event_name == 'workflow_dispatch' && inputs.showcase || 'true'}}
+          BUILD_PORTFOLIO: ${{ github.event_name == 'workflow_dispatch' && inputs.portfolio || 'true' }}
+        run: env
