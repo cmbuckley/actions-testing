@@ -9,7 +9,7 @@ jobs:
     name: Dump data
     runs-on: ubuntu-latest
     steps:
-      - run: jq . <<< "${{ github.event.workflow_run }}"
+      - run: jq . <<< "${{ toJson(github.event.workflow_run) }}"
       - uses: actions/github-script@v7
         with:
           script: console.log(context.payload.workflow_run);
